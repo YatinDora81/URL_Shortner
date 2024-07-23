@@ -5,6 +5,7 @@ import { Copy, Download, Trash } from "lucide-react";
 import { useFetch } from "../hooks/use_fetch";
 import { deleteUrl } from "../db/apiUrls";
 import { BeatLoader } from "react-spinners";
+import { toast } from "react-toastify";
 
 const Link_Card = ({ url, fetchUrls, fetchClicks }) => {
   const downloadImage = () => {
@@ -13,7 +14,7 @@ const Link_Card = ({ url, fetchUrls, fetchClicks }) => {
     const anchor = document.createElement("a");
     anchor.href = imageUrl;
     anchor.download = fileName;
-    anchor.target = "_blank"
+    anchor.target = "_blank";
     document.body.appendChild(anchor);
     anchor.click();
     document.removeChild(anchor);
@@ -46,9 +47,12 @@ const Link_Card = ({ url, fetchUrls, fetchClicks }) => {
       <div className=" flex gap-2">
         <Button
           variant="ghost"
-          onClick={() =>
-            navigator.clipboard.writeText(`${import.meta.env.VITE_DOMAIN}${url?.short_url}`)
-          }
+          onClick={() => {
+            navigator.clipboard.writeText(
+              `${import.meta.env.VITE_DOMAIN}${url?.short_url}`
+            );
+            toast.success("Copied Successfully");
+          }}
         >
           <Copy></Copy>
         </Button>

@@ -74,6 +74,16 @@ const Signup = () => {
     }
   };
 
+
+
+  const handleKeyUp = (e)=>{
+    e.preventDefault();
+    if(e.key === "Enter"){
+      handleSignup()
+    }
+  }
+ 
+
   return (
     <Card>
       <CardHeader>
@@ -91,6 +101,7 @@ const Signup = () => {
             type="text"
             placeholder="Enter Name"
             onChange={handleChangeInput}
+            onKeyUp = {handleKeyUp}
           ></Input>
           {errors.name && <Error message={errors.name}></Error>}
         </div>
@@ -102,6 +113,7 @@ const Signup = () => {
             type="email"
             placeholder="Enter Email"
             onChange={handleChangeInput}
+            onKeyUp = {handleKeyUp}
           ></Input>
           {errors.email && <Error message={errors.email}></Error>}
         </div>
@@ -113,12 +125,14 @@ const Signup = () => {
             type="password"
             placeholder="Enter password"
             onChange={handleChangeInput}
+            onKeyUp = {handleKeyUp}
           ></Input>
           {errors.password && <Error message={errors.password}></Error>}
         </div>
       </CardContent>
       <CardContent className="space-y-2">
-        <div className=" space-y-1">
+        <div className=" space-y-1 flex flex-col md:flex-row items-center">
+          <h1 className=" text-lg w-2/6 font-semibold mr-2 text-gray-300 ">Profile Pic</h1>
           <Input
             name="profile_pic"
             type="file"

@@ -19,7 +19,7 @@ const Auth = () => {
   },[isAuthenticated , loading])
 
   return (
-    <div className=" mt-20 flex flex-col items-center gap-10">
+    <div className=" mt-10 flex flex-col items-center gap-10">
       <h1 className=" text-5xl font-extrabold">
         {longLink ? "Hold up! Let's Login first..." : "Login / Signup"}
       </h1>

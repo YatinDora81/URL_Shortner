@@ -70,6 +70,13 @@ const CreateLink = () => {
     }
   }
 
+  const handleKeyUp = (e)=>{
+    e.preventDefault();
+    if(e.key==="Enter"){
+      createNewUrl()
+    }
+  }
+
 
 
   useEffect(()=>{
@@ -92,14 +99,14 @@ const CreateLink = () => {
           formValues?.longUrl && <QRCode ref={ref} value={formValues?.longUrl} size={250} />
         }
 
-        <Input id="title" placeholder="Short Link's Title" value={formValues.title} onChange={handleChange}></Input>
+        <Input id="title" placeholder="Short Link's Title" value={formValues.title} onKeyUp={handleKeyUp} onChange={handleChange}></Input>
         { errors?.title &&  <Error message={errors.title}></Error>}
 
-        <Input id="longUrl" placeholder="Enter your Loooong URL" value={formValues.longUrl} onChange={handleChange}></Input>
+        <Input id="longUrl" placeholder="Enter your Loooong URL" value={formValues.longUrl} onKeyUp={handleKeyUp} onChange={handleChange}></Input>
         { errors?.longUrl && <Error message={errors?.longUrl}></Error>}
         <div className=" flex items-center gap-2">
           <Card className="p-2">trimrr.in</Card> /
-          <Input value={formValues.customUrl} onChange={handleChange} id="customUrl" placeholder="Custom Link (optional)" ></Input>
+          <Input value={formValues.customUrl} onChange={handleChange} onKeyUp={handleKeyUp} id="customUrl" placeholder="Custom Link (optional)" ></Input>
         </div>
         {error && <Error message={error?.message}></Error>}
 

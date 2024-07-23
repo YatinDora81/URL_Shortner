@@ -76,6 +76,13 @@ const Login = () => {
     }
   };
 
+
+  const handleKeyUp = (e)=>{
+    e.preventDefault();
+    if(e.key === "Enter"){
+      handleLogin()
+    }
+  }
  
 
   
@@ -97,6 +104,7 @@ const Login = () => {
             type="email"
             placeholder="Enter Email"
             onChange={handleChangeInput}
+            onKeyUp = {handleKeyUp}
           ></Input>
           {errors.email && <Error message={errors.email}></Error>}
         </div>
@@ -108,6 +116,7 @@ const Login = () => {
             type="password"
             placeholder="Enter password"
             onChange={handleChangeInput}
+            onKeyUp = {handleKeyUp}
           ></Input>
           {errors.password && <Error message={errors.password}></Error>}
         </div>

@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/card";
 import Location from "../components/Location";
 import DeviceStats from "../components/DeviceStats";
+import { toast } from "react-toastify";
 
 const Link = () => {
   const { user } = UrlState();
@@ -97,11 +98,12 @@ const Link = () => {
           <div className=" flex gap-2">
             <Button
               variant="ghost"
-              onClick={() =>
+              onClick={() => {
                 navigator.clipboard.writeText(
                   `${import.meta.env.VITE_DOMAIN}${url?.short_url}`
-                )
-              }
+                );
+                toast.success("Copied Successfully");
+              }}
             >
               <Copy></Copy>
             </Button>
@@ -135,23 +137,29 @@ const Link = () => {
             <CardHeader>
               <CardTitle className=" text-4xl font-extrabold ">Stats</CardTitle>
             </CardHeader>
-            {stats && stats?.length? <CardContent className=" flex flex-col gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle>Total Clicks</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p>{stats?.length}</p>
-                </CardContent>
-              </Card>
+            {stats && stats?.length ? (
+              <CardContent className=" flex flex-col gap-6">
+                <Card>
+                  <CardHeader>
+                    <CardTitle>Total Clicks</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p>{stats?.length}</p>
+                  </CardContent>
+                </Card>
 
                 <CardTitle>Location Data</CardTitle>
                 <Location stats={stats} />
                 <CardTitle>Device Info</CardTitle>
                 <DeviceStats stats={stats}></DeviceStats>
-                
-
-            </CardContent> : (<CardContent>{loadingStats===false ? "No Statistics yet" : "Loading Statistics.."}</CardContent>)}
+              </CardContent>
+            ) : (
+              <CardContent>
+                {loadingStats === false
+                  ? "No Statistics yet"
+                  : "Loading Statistics.."}
+              </CardContent>
+            )}
           </Card>
         </div>
       </div>
